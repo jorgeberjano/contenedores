@@ -1,0 +1,34 @@
+version: '2'
+
+services:
+  kowl-search-local:
+    container_name: kowl-search-local
+    image: quay.io/cloudhut/kowl:master
+#    ports:
+#      - "8080:8080"
+    network_mode: host
+    environment:
+      KAFKA_BROKERS: host.docker.internal:9092
+      KAFKA_SCHEMAREGISTRY_ENABLED: "true"
+      KAFKA_SCHEMAREGISTRY_URLS: http://host.docker.internal:8081
+      KAFKA_SCHEMAREGISTRY_USERNAME: client
+      KAFKA_SCHEMAREGISTRY_PASSWORD: client
+  kowl-search-AVE:
+      container_name: kowl-search-AVE
+      image: quay.io/cloudhut/kowl:master
+      ports:
+        - 8282:8080
+      environment:
+        KAFKA_BROKERS: WWAZUR0018E4006.eci.geci:9092
+        KAFKA_TLS_ENABLED: "true"
+        KAFKA_TLS_INSECURESKIPTLSVERIFY: "true"
+        KAFKA_SASL_ENABLED: "true"
+        KAFKA_SASL_USERNAME: QFL-000
+        KAFKA_SASL_PASSWORD: FIREFLY_QFL-000
+        KAFKA_SASL_MECHANISM: SCRAM-SHA-512
+        KAFKA_SCHEMAREGISTRY_ENABLED: "true"
+        KAFKA_SCHEMAREGISTRY_URLS: https://cp-enterprise-schema-registry.paas.ave.eci.geci
+        KAFKA_SCHEMAREGISTRY_TLS_ENABLED: "true"
+        KAFKA_SCHEMAREGISTRY_TLS_INSECURESKIPTLSVERIFY: "true"
+        KAFKA_SCHEMAREGISTRY_USERNAME: client
+        KAFKA_SCHEMAREGISTRY_PASSWORD: client
