@@ -4,8 +4,9 @@ services:
   # this is our kafka cluster.
   kafka-cluster:
     image: landoop/fast-data-dev:2.5.1
+    container_name: broker
     environment:
-      ADV_HOST: 127.0.0.1         # Change to 192.168.99.100 if using Docker Toolbox
+      ADV_HOST: localhost         # Change to 192.168.99.100 if using Docker Toolbox
       RUNTESTS: 0                 # Disable Running tests so the cluster starts faster
       FORWARDLOGS: 0              # Disable running 5 file source connectors that bring application logs into Kafka topics
       SAMPLEDATA: 0               # Do not create sea_vessel_position_reports, nyc_yellow_taxi_trip_data, reddit_posts topics with sample Avro records.
